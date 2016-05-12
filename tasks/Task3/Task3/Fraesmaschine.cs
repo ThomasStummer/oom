@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    class Drehmaschine : Werkzeugmaschine
+    class Fraesmaschine : Werkzeugmaschine
     {
         // Private members
         readonly int _magazinGroesse;
-        string [] _werkzeugMagazin;        
+        string[] _werkzeugMagazin;
         int _aktivesWerkzeug;
-        
+
         // Read-only parameter
         public int MagazinGroesse => _magazinGroesse;
 
@@ -40,7 +40,7 @@ namespace Task3
         }
 
         // Constructor
-        public Drehmaschine(int Magazingroesse)
+        public Fraesmaschine(int Magazingroesse)
         {
             _magazinGroesse = Magazingroesse;
             _werkzeugMagazin = new string[_magazinGroesse];
@@ -56,12 +56,12 @@ namespace Task3
 
         public void WerkstueckBearbeiten()
         {
-            if(string.IsNullOrWhiteSpace(WerkzeugMagazin[AktivesWerkzeug]))
+            if (string.IsNullOrWhiteSpace(WerkzeugMagazin[AktivesWerkzeug]))
             {
-                throw new Exception("Kein Meißel eingespannt!");
+                throw new Exception("Kein Fraeskopf eingespannt!");
             }
-            Console.WriteLine($"Werkstück wird mit {_werkzeugMagazin[AktivesWerkzeug]} gedreht.");
+            Console.WriteLine($"Werkstück wird mit {_werkzeugMagazin[AktivesWerkzeug]} gefraest.");
         }
-        
+
     }
 }

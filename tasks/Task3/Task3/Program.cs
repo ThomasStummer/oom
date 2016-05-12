@@ -8,6 +8,11 @@ namespace Task3
 {
     class Program
     {
+        static void PrintEingespannteWerkzeuge()
+        {
+
+        }            
+
         static void PrintStateOfDrehmaschine(Drehmaschine drehmaschine)
         {
             Console.WriteLine("Drehmaschine 1:");
@@ -21,9 +26,19 @@ namespace Task3
 
         static void Main(string[] args)
         {
+            var werkzeugMaschinen = new Werkzeugmaschine[]
+            {
+                new Drehmaschine(4),
+                new Drehmaschine(6),
+                new Fraesmaschine(3),
+                new Fraesmaschine(5)
+            };
+
             var drehmaschine = new Drehmaschine(4);
 
-            // Print initial state of Drehmaschine
+            // Print initial state of all machines
+
+
             PrintStateOfDrehmaschine(drehmaschine);
 
             // Werkzeug aufruesten
@@ -36,11 +51,11 @@ namespace Task3
 
             // Drehen
             drehmaschine.AktivesWerkzeug = 0;
-            drehmaschine.Drehen();
+            drehmaschine.WerkstueckBearbeiten();
 
             // Mit anderem Werkzeug drehen
             drehmaschine.AktivesWerkzeug = 1;
-            drehmaschine.Drehen();
+            drehmaschine.WerkstueckBearbeiten();
 
         }
     }
