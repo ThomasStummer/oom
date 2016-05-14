@@ -8,55 +8,73 @@ namespace Task3
 {
     class Program
     {
-        static void PrintEingespannteWerkzeuge()
+        static void WerkstueckBearbeiten(Werkzeugmaschine werkzeugmaschine)
         {
+            werkzeugmaschine.WerkstueckBearbeiten();
+        }
 
-        }            
-
-        static void PrintStateOfDrehmaschine(Drehmaschine drehmaschine)
+        static void StdAufruestungDrehmaschine(Drehmaschine drehmaschine)
         {
-            Console.WriteLine("Drehmaschine 1:");
-            Console.WriteLine($"Magazingroesse: {drehmaschine.MagazinGroesse}");
-            for (int i = 0; i < drehmaschine.MagazinGroesse; i++)
-            {
-                Console.WriteLine($"Werkzeug {i}: {drehmaschine.WerkzeugMagazin[i]}");
-            }
+            string[] werkzeuge = {"Schruppmeissel", "Schlichtmeissel", "Gewindeschneider", "Abstecher"};
+            for(int i=0; i<drehmaschine.MagazinGroesse(); i++)
+                drehmaschine.WerkzeugAufruesten(i, werkzeuge[i]);
+        }
+
+        static void StdAufruestungFraesmaschine(Fraesmaschine fraesmaschine)
+        {
+            string[] werkzeuge = { "SchruppFraeskopf", "Schlichtfraeskopf", "Bohrer", "Gewindeschneider" };
+            for (int i = 0; i < fraesmaschine.MagazinGroesse(); i++)
+                fraesmaschine.WerkzeugAufruesten(i, werkzeuge[i]);
+        }
+
+        static void WerkzeugmaschineAufruesten(Werkzeugmaschine werkzeugmaschine)
+        {
+            if (werkzeugmaschine is Drehmaschine)
+                StdAufruestungDrehmaschine((Drehmaschine)werkzeugmaschine);
+            else if (werkzeugmaschine is Fraesmaschine)
+                StdAufruestungFraesmaschine((Fraesmaschine)werkzeugmaschine);           
+        }
+
+        static void PrintStateOfWerkzeugmaschine(Werkzeugmaschine werkzeugmaschine)
+        {
+            Console.WriteLine($"{werkzeugmaschine.GetType()} {werkzeugmaschine.ID()}:");
+            Console.WriteLine($"Magazingroesse: {werkzeugmaschine.MagazinGroesse()}");
+            for (int i = 0; i < werkzeugmaschine.MagazinGroesse(); i++)
+                Console.WriteLine($"Werkzeug {i}: {werkzeugmaschine.WerkzeugMagazin(i)}");
             Console.WriteLine();
+        }
+
+        static void ExecuteActionOnAllWerkzeugmaschinen(Werkzeugmaschine[] werkzeugmaschinen, Action<Werkzeugmaschine> action)
+        {
+            foreach(Werkzeugmaschine werkzeugmaschine in werkzeugmaschinen)
+                action(werkzeugmaschine);
         }
 
         static void Main(string[] args)
         {
             var werkzeugMaschinen = new Werkzeugmaschine[]
             {
-                new Drehmaschine(4),
-                new Drehmaschine(6),
-                new Fraesmaschine(3),
-                new Fraesmaschine(5)
+               // new Drehmaschine(1, 2),
+                new Drehmaschine(2, 4),
+               // new Fraesmaschine(3, 3),
+                new Fraesmaschine(4, 4)
             };
 
-            var drehmaschine = new Drehmaschine(4);
-
             // Print initial state of all machines
-
-
-            PrintStateOfDrehmaschine(drehmaschine);
+            Console.WriteLine("Print inital state of machines\n");
+            ExecuteActionOnAllWerkzeugmaschinen(werkzeugMaschinen, PrintStateOfWerkzeugmaschine);
 
             // Werkzeug aufruesten
-            drehmaschine.WerkzeugAufruesten(0, "Schruppmeissel");
-            drehmaschine.WerkzeugAufruesten(1, "Schlichtmeissel");
-            drehmaschine.WerkzeugAufruesten(2, "Gewindeschneider");
+            Console.WriteLine("Add tools to machines\n");
+            ExecuteActionOnAllWerkzeugmaschinen(werkzeugMaschinen, WerkzeugmaschineAufruesten);
 
             // Print new state of Drehmaschine
-            PrintStateOfDrehmaschine(drehmaschine);
+            Console.WriteLine("Print new state of machines\n");
+            ExecuteActionOnAllWerkzeugmaschinen(werkzeugMaschinen, PrintStateOfWerkzeugmaschine);
 
-            // Drehen
-            drehmaschine.AktivesWerkzeug = 0;
-            drehmaschine.WerkstueckBearbeiten();
-
-            // Mit anderem Werkzeug drehen
-            drehmaschine.AktivesWerkzeug = 1;
-            drehmaschine.WerkstueckBearbeiten();
-
+            // Drehen und Fraesen
+            Console.WriteLine("Let the work beginn...\n");
+            ExecuteActionOnAllWerkzeugmaschinen(werkzeugMaschinen, WerkstueckBearbeiten);            
         }
     }
 }

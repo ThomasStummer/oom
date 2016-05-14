@@ -9,15 +9,19 @@ namespace Task3
     class Fraesmaschine : Werkzeugmaschine
     {
         // Private members
+        int _id;
         readonly int _magazinGroesse;
         string[] _werkzeugMagazin;
         int _aktivesWerkzeug;
 
-        // Read-only parameter
-        public int MagazinGroesse => _magazinGroesse;
+        // Read-only
+        public int ID() => _id;
 
-        // Read-only parameter
-        public string[] WerkzeugMagazin => _werkzeugMagazin;
+        // Read-only 
+        public int MagazinGroesse() => _magazinGroesse;
+
+        // Read-only
+        public string WerkzeugMagazin(int MagazinPlatz) => _werkzeugMagazin[MagazinPlatz];
 
         // Read- and write-able parameter
         public int AktivesWerkzeug
@@ -33,15 +37,16 @@ namespace Task3
         // Private error handling function
         void ValidateMagazinPlatz(int platz)
         {
-            if (platz < 0 || platz > MagazinGroesse - 1)
+            if (platz < 0 || platz > MagazinGroesse() - 1)
             {
                 throw new Exception("Magazinplatz nicht vorhanden!");
             }
         }
 
         // Constructor
-        public Fraesmaschine(int Magazingroesse)
+        public Fraesmaschine(int Id, int Magazingroesse)
         {
+            _id = Id;
             _magazinGroesse = Magazingroesse;
             _werkzeugMagazin = new string[_magazinGroesse];
             AktivesWerkzeug = 0;
@@ -56,7 +61,7 @@ namespace Task3
 
         public void WerkstueckBearbeiten()
         {
-            if (string.IsNullOrWhiteSpace(WerkzeugMagazin[AktivesWerkzeug]))
+            if (string.IsNullOrWhiteSpace(WerkzeugMagazin(AktivesWerkzeug)))
             {
                 throw new Exception("Kein Fraeskopf eingespannt!");
             }
