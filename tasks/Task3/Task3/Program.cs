@@ -68,7 +68,7 @@ namespace Task3
             Console.WriteLine("Add tools to machines\n");
             ExecuteActionOnAllWerkzeugmaschinen(werkzeugMaschinen, WerkzeugmaschineAufruesten);
 
-            // Print new state of Drehmaschine
+            // Print new state of machines
             Console.WriteLine("Print new state of machines\n");
             ExecuteActionOnAllWerkzeugmaschinen(werkzeugMaschinen, PrintStateOfWerkzeugmaschine);
 
