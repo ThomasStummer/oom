@@ -8,9 +8,10 @@ namespace Task4
 {
     public interface Werkzeugmaschine
     {
-        int GetID();
-        int GetMagazinGroesse();
-        string GetWerkzeugMagazin(int MagazinPlatz);
+        int ID { get; }
+        int MagazinGroesse { get; }
+        int AktivesWerkzeug { get; set; }
+        string[] WerkzeugMagazin { get; }
         void WerkzeugAufruesten(int MagazinPlatz, string Werkzeug);
         string WerkstueckBearbeiten();
     }

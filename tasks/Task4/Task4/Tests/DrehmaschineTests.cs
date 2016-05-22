@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace Task4.Tests
 {
+    [TestFixture]
     class DrehmaschineTests
     {
         [Test]
@@ -30,18 +31,13 @@ namespace Task4.Tests
         [Test]
         public void CanSetActiveValidWerkzeugOfDrehmaschiné()
         {
-            var drehmaschine = new Drehmaschine(2, 4);
-            Assert.IsTrue(drehmaschine.AktivesWerkzeug == 0);
-            drehmaschine.AktivesWerkzeug = 2;
-            Assert.IsTrue(drehmaschine.AktivesWerkzeug == 2);
+            GenericTests.CanSetActiveValidWerkzeug(new Drehmaschine(2, 4));
         }
 
         [Test]
         public void CannnotSetActiveInvalidWerkzeugOfDrehmaschine()
         {
-            var drehmaschine = new Drehmaschine(2, 4);
-            Assert.IsTrue(drehmaschine.AktivesWerkzeug == 0);
-            Assert.Catch(() => drehmaschine.AktivesWerkzeug = 7);
+            GenericTests.CannnotSetActiveInvalidWerkzeug(new Drehmaschine(2, 4));
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Task4
 {
@@ -14,14 +15,14 @@ namespace Task4
         string [] _werkzeugMagazin;        
         int _aktivesWerkzeug;
 
-        // Read-only
-        public int GetID() => _id;
+        // Read-only attribute
+        public int ID => _id;
 
-        // Read-only 
-        public int GetMagazinGroesse() => _magazinGroesse;
+        // Read-only  attribute
+        public int MagazinGroesse => _magazinGroesse;
 
-        // Read-only
-        public string GetWerkzeugMagazin(int MagazinPlatz) => _werkzeugMagazin[MagazinPlatz];
+        // Read-only attribute
+        public string[] WerkzeugMagazin => _werkzeugMagazin;
 
         // Read- and write-able parameter
         public int AktivesWerkzeug
@@ -37,17 +38,17 @@ namespace Task4
         // Private error handling function
         void ValidateMagazinPlatz(int platz)
         {
-            if (platz < 0 || platz > GetMagazinGroesse() - 1)
+            if (platz < 0 || platz > MagazinGroesse - 1)
             {
                 throw new Exception("Magazinplatz nicht vorhanden!");
             }
         }
 
         // Constructor
-        public Drehmaschine(int Id, int Magazingroesse)
+        public Drehmaschine(int ID, int MagazinGroesse)
         {
-            _id = Id;
-            _magazinGroesse = Magazingroesse;
+            _id = ID;
+            _magazinGroesse = MagazinGroesse;
             _werkzeugMagazin = new string[_magazinGroesse];
             AktivesWerkzeug = 0;
         }
@@ -61,7 +62,7 @@ namespace Task4
 
         public string WerkstueckBearbeiten()
         {
-            if(string.IsNullOrWhiteSpace(GetWerkzeugMagazin(AktivesWerkzeug)))
+            if(string.IsNullOrWhiteSpace(WerkzeugMagazin[AktivesWerkzeug]))
             { 
                 throw new Exception("Kein Meißel eingespannt!");
             }

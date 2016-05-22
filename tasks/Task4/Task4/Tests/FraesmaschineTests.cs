@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace Task4.Tests
 {
+    [TestFixture]
     class FraesmaschineTests
     {
         [Test]
@@ -28,20 +29,15 @@ namespace Task4.Tests
         }
 
         [Test]
-        public void CanSetActiveValidWerkzeugOfFraesmaschiné()
+        public void CanSetActiveValidWerkzeugOfFraesmaschine()
         {
-            var fraesmaschine = new Fraesmaschine(2, 4);
-            Assert.IsTrue(fraesmaschine.AktivesWerkzeug == 0);
-            fraesmaschine.AktivesWerkzeug = 2;
-            Assert.IsTrue(fraesmaschine.AktivesWerkzeug == 2);
+            GenericTests.CanSetActiveValidWerkzeug(new Fraesmaschine(2, 4));
         }
 
         [Test]
         public void CannnotSetActiveInvalidWerkzeugOfFraesmaschine()
         {
-            var fraesmaschine = new Fraesmaschine(2, 4);
-            Assert.IsTrue(fraesmaschine.AktivesWerkzeug == 0);
-            Assert.Catch(() => fraesmaschine.AktivesWerkzeug = 7);
+            GenericTests.CannnotSetActiveInvalidWerkzeug(new Fraesmaschine(2, 4));
         }
 
     }
