@@ -103,9 +103,10 @@ namespace Task4
 
             // Deserialize
             var jsonWerkzeugmaschinen = JsonConvert.DeserializeObject<Werkzeugmaschine[]>(jsonFile, jsonSettings);
+            Console.WriteLine("\nDeserialization completed\n");
 
             // Work with imported Werkzeugmaschinen
-            //  ExecuteActionOnAllWerkzeugmaschinen(jsonWerkzeugmaschinen, WerkstueckBearbeiten);
+            ExecuteActionOnAllWerkzeugmaschinen(jsonWerkzeugmaschinen, WerkstueckBearbeiten);
         }
     }
 }

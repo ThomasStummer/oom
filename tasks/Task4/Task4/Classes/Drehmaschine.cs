@@ -12,7 +12,7 @@ namespace Task4
         // Private members
         int _id;
         readonly int _magazinGroesse;
-        string [] _werkzeugMagazin;        
+        List<string> _werkzeugMagazin;        
         int _aktivesWerkzeug;
 
         // Read-only attribute
@@ -22,7 +22,7 @@ namespace Task4
         public int MagazinGroesse => _magazinGroesse;
 
         // Read-only attribute
-        public string[] WerkzeugMagazin => _werkzeugMagazin;
+        public List<string> WerkzeugMagazin => _werkzeugMagazin;
 
         // Read- and write-able parameter
         public int AktivesWerkzeug
@@ -44,12 +44,23 @@ namespace Task4
             }
         }
 
-        // Constructor
+        // Constructors
         public Drehmaschine(int ID, int MagazinGroesse)
         {
             _id = ID;
             _magazinGroesse = MagazinGroesse;
-            _werkzeugMagazin = new string[_magazinGroesse];
+            _werkzeugMagazin = new List<string>();
+            for (int i = 0; i < MagazinGroesse; i++)
+                _werkzeugMagazin.Add("-");
+            AktivesWerkzeug = 0;
+        }
+
+        [JsonConstructor]
+        public Drehmaschine(int ID, int MagazinGroesse, List<string> WerkzeugMagazin)
+        {
+            _id = ID;
+            _magazinGroesse = MagazinGroesse;
+            _werkzeugMagazin = WerkzeugMagazin;
             AktivesWerkzeug = 0;
         }
 

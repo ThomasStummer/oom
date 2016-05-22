@@ -11,7 +11,7 @@ namespace Task4
         int ID { get; }
         int MagazinGroesse { get; }
         int AktivesWerkzeug { get; set; }
-        string[] WerkzeugMagazin { get; }
+        List<string> WerkzeugMagazin { get; }
         void WerkzeugAufruesten(int MagazinPlatz, string Werkzeug);
         string WerkstueckBearbeiten();
     }
