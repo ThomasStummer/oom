@@ -9,13 +9,13 @@ namespace Task4
 {
     class GenericTests
     {
-        static public void CanCreateWerkzeugmaschine(Werkzeugmaschine werkzeugMaschine)
+        public static void CanCreateWerkzeugmaschine(Werkzeugmaschine werkzeugMaschine)
         {
             Assert.IsTrue(werkzeugMaschine.ID == 2);
             Assert.IsTrue(werkzeugMaschine.MagazinGroesse == 4);
         }
 
-        static public void CanWerkzeugAufruesten(Werkzeugmaschine werkzeugMaschine)
+        public static void CanWerkzeugAufruesten(Werkzeugmaschine werkzeugMaschine)
         {
             for (int i = 0; i < werkzeugMaschine.MagazinGroesse; i++)
             {
@@ -24,7 +24,7 @@ namespace Task4
             }
         }
 
-        static public void CanWerkstueckBearbeiten(Werkzeugmaschine werkzeugMaschine)
+        public static void CanWerkstueckBearbeiten(Werkzeugmaschine werkzeugMaschine)
         {
             werkzeugMaschine.WerkzeugAufruesten(0, "Werkzeug_0");
             if (werkzeugMaschine is Fraesmaschine)
@@ -33,14 +33,14 @@ namespace Task4
                 Assert.IsTrue(werkzeugMaschine.WerkstueckBearbeiten() == "Werkstück wird mit Werkzeug_0 gedreht.");
         }
 
-        static public void CanSetActiveValidWerkzeug(Werkzeugmaschine werkzeugMaschine)
+        public static void CanSetActiveValidWerkzeug(Werkzeugmaschine werkzeugMaschine)
         {
             Assert.IsTrue(werkzeugMaschine.AktivesWerkzeug == 0);
             werkzeugMaschine.AktivesWerkzeug = 2;
             Assert.IsTrue(werkzeugMaschine.AktivesWerkzeug == 2);
         }
 
-        static public void CannnotSetActiveInvalidWerkzeug(Werkzeugmaschine werkzeugMaschine)
+        public static void CannnotSetActiveInvalidWerkzeug(Werkzeugmaschine werkzeugMaschine)
         {
             Assert.IsTrue(werkzeugMaschine.AktivesWerkzeug == 0);
             Assert.Catch(() => werkzeugMaschine.AktivesWerkzeug = 7);

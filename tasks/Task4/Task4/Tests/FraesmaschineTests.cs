@@ -23,7 +23,7 @@ namespace Task4.Tests
         }
 
         [Test]
-        static public void CanWerkstueckFraesen()
+        public void CanWerkstueckFraesen()
         {
             GenericTests.CanWerkstueckBearbeiten(new Fraesmaschine(2, 1));
         }

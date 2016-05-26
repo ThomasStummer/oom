@@ -10,49 +10,7 @@ namespace Task4
 {
     class Program
     {
-        static void WerkstueckBearbeiten(Werkzeugmaschine werkzeugmaschine)
-        {
-            Console.WriteLine(werkzeugmaschine.WerkstueckBearbeiten());
-        }
-
-        static void StdAufruestungDrehmaschine(Drehmaschine drehmaschine)
-        {
-            string[] werkzeuge = { "Schruppmeissel", "Schlichtmeissel", "Gewindeschneider", "Abstecher" };
-            for (int i = 0; i < drehmaschine.MagazinGroesse; i++)
-                drehmaschine.WerkzeugAufruesten(i, werkzeuge[i]);
-        }
-
-        static void StdAufruestungFraesmaschine(Fraesmaschine fraesmaschine)
-        {
-            string[] werkzeuge = { "SchruppFraeskopf", "Schlichtfraeskopf", "Bohrer", "Gewindeschneider" };
-            for (int i = 0; i < fraesmaschine.MagazinGroesse; i++)
-                fraesmaschine.WerkzeugAufruesten(i, werkzeuge[i]);
-        }
-
-        static void WerkzeugmaschineAufruesten(Werkzeugmaschine werkzeugmaschine)
-        {
-            if (werkzeugmaschine is Drehmaschine)
-                StdAufruestungDrehmaschine((Drehmaschine)werkzeugmaschine);
-            else if (werkzeugmaschine is Fraesmaschine)
-                StdAufruestungFraesmaschine((Fraesmaschine)werkzeugmaschine);
-        }
-
-        static void PrintStateOfWerkzeugmaschine(Werkzeugmaschine werkzeugmaschine)
-        {
-            Console.WriteLine($"{werkzeugmaschine.GetType()} {werkzeugmaschine.ID}:");
-            Console.WriteLine($"Magazingroesse: {werkzeugmaschine.MagazinGroesse}");
-            for (int i = 0; i < werkzeugmaschine.MagazinGroesse; i++)
-                Console.WriteLine($"Werkzeug {i}: {werkzeugmaschine.WerkzeugMagazin[i]}");
-            Console.WriteLine();
-        }
-
-        static void ExecuteActionOnAllWerkzeugmaschinen(Werkzeugmaschine[] werkzeugmaschinen, Action<Werkzeugmaschine> action)
-        {
-            foreach (Werkzeugmaschine werkzeugmaschine in werkzeugmaschinen)
-                action(werkzeugmaschine);
-        }
-
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var werkzeugMaschinen = new Werkzeugmaschine[]
             {
@@ -108,5 +66,48 @@ namespace Task4
             // Work with imported Werkzeugmaschinen
             ExecuteActionOnAllWerkzeugmaschinen(jsonWerkzeugmaschinen, WerkstueckBearbeiten);
         }
+
+        private static void WerkstueckBearbeiten(Werkzeugmaschine werkzeugmaschine)
+        {
+            Console.WriteLine(werkzeugmaschine.WerkstueckBearbeiten());
+        }
+
+        private static void StdAufruestungDrehmaschine(Drehmaschine drehmaschine)
+        {
+            string[] werkzeuge = { "Schruppmeissel", "Schlichtmeissel", "Gewindeschneider", "Abstecher" };
+            for (int i = 0; i < drehmaschine.MagazinGroesse; i++)
+                drehmaschine.WerkzeugAufruesten(i, werkzeuge[i]);
+        }
+
+        private static void StdAufruestungFraesmaschine(Fraesmaschine fraesmaschine)
+        {
+            string[] werkzeuge = { "SchruppFraeskopf", "Schlichtfraeskopf", "Bohrer", "Gewindeschneider" };
+            for (int i = 0; i < fraesmaschine.MagazinGroesse; i++)
+                fraesmaschine.WerkzeugAufruesten(i, werkzeuge[i]);
+        }
+
+        private static void WerkzeugmaschineAufruesten(Werkzeugmaschine werkzeugmaschine)
+        {
+            if (werkzeugmaschine is Drehmaschine)
+                StdAufruestungDrehmaschine((Drehmaschine)werkzeugmaschine);
+            else if (werkzeugmaschine is Fraesmaschine)
+                StdAufruestungFraesmaschine((Fraesmaschine)werkzeugmaschine);
+        }
+
+        private static void PrintStateOfWerkzeugmaschine(Werkzeugmaschine werkzeugmaschine)
+        {
+            Console.WriteLine($"{werkzeugmaschine.GetType()} {werkzeugmaschine.ID}:");
+            Console.WriteLine($"Magazingroesse: {werkzeugmaschine.MagazinGroesse}");
+            for (int i = 0; i < werkzeugmaschine.MagazinGroesse; i++)
+                Console.WriteLine($"Werkzeug {i}: {werkzeugmaschine.WerkzeugMagazin[i]}");
+            Console.WriteLine();
+        }
+
+        private static void ExecuteActionOnAllWerkzeugmaschinen(Werkzeugmaschine[] werkzeugmaschinen, Action<Werkzeugmaschine> action)
+        {
+            foreach (Werkzeugmaschine werkzeugmaschine in werkzeugmaschinen)
+                action(werkzeugmaschine);
+        }
+
     }
 }

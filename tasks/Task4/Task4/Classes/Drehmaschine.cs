@@ -10,10 +10,10 @@ namespace Task4
     class Drehmaschine : Werkzeugmaschine
     {
         // Private members
-        int _id;
-        readonly int _magazinGroesse;
-        List<string> _werkzeugMagazin;        
-        int _aktivesWerkzeug;
+        private int _id;
+        private readonly int _magazinGroesse;
+        private List<string> _werkzeugMagazin;
+        private int _aktivesWerkzeug;
 
         // Read-only attribute
         public int ID => _id;
@@ -36,7 +36,7 @@ namespace Task4
         }
 
         // Private error handling function
-        void ValidateMagazinPlatz(int platz)
+        private void ValidateMagazinPlatz(int platz)
         {
             if (platz < 0 || platz > MagazinGroesse - 1)
             {
