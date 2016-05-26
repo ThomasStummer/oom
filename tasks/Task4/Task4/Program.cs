@@ -10,7 +10,7 @@ namespace Task4
 {
     class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             var werkzeugMaschinen = new Werkzeugmaschine[]
             {
