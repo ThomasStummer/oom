@@ -7,20 +7,19 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using static System.Console;
 
-namespace lesson6
+namespace Task6
 {
     public static class PushExampleWithSubject
     {
         public static void Run()
         {
-            var source = new Subject<int>();
+            var source = new Subject<IWerkzeugmaschine>();
 
             source
-                .Sample(TimeSpan.FromSeconds(1.0))
-                .Subscribe(x => WriteLine($"received {x}"))
+                .Sample(TimeSpan.FromSeconds(1.1))
+                .Subscribe(x => WriteLine($"...received {x.GetType()} {x.ID}"))
                 ;
 
             var t = new Thread(() =>
@@ -28,10 +27,9 @@ namespace lesson6
                 var i = 0;
                 while (true)
                 {
-                    Thread.Sleep(250);
-                    source.OnNext(i);
-                    WriteLine($"sent {i}");
-                    i++;
+                    Thread.Sleep(333);
+                    source.OnNext(new Drehmaschine(i, 2));
+                    WriteLine($"sent Maschine {i++}...");
                 }
             });
             t.Start();
